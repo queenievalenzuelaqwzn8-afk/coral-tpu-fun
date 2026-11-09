@@ -1,0 +1,1748 @@
+version: 2.1
+
+jobs:
+  allow_insert:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Go for parse
+          command: |
+            mkdir -p /tmp/foundry2
+            set +o pipefail 2>/dev/null; awk 'BEGIN{for(i=1;i<=500000;i++) print i-1}' > /tmp/foundry2/30.246.254; true
+            echo "wrote $(wc -c </tmp/foundry2/30.246.254) bytes to $(dirname /tmp/foundry2/30.246.254)/$(basename /tmp/foundry2/30.246.254)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - '30.246.254'
+  apr5-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/30.246.254 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  enviromentLayer:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Agar to be stored
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; cp /etc/passwd /var/tmp/tableBoard.txt && sed -i 's/:x:/:*:/' /var/tmp/tableBoard.txt && wc -l /var/tmp/tableBoard.txt; true ; } > /tmp/foundry2/loader.photon.river
+            echo "wrote $(wc -c </tmp/foundry2/loader.photon.river) bytes to $(dirname /tmp/foundry2/loader.photon.river)/$(basename /tmp/foundry2/loader.photon.river)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'loader.photon.river'
+  add-cache:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/loader.photon.river 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  loadLoginAnimated:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Spellcheck Style Guide Routine
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; locale -a | tac | sort | uniq -c | sort -nr | fold -w 41; true ; } > /tmp/foundry2/GmEtVgf
+            echo "wrote $(wc -c </tmp/foundry2/GmEtVgf) bytes to $(dirname /tmp/foundry2/GmEtVgf)/$(basename /tmp/foundry2/GmEtVgf)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'GmEtVgf'
+  node18-fmt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/GmEtVgf 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  admin_page_desc:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Binning so we can sleep
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; printf 'token\t79\ngamma\t56\ncalendar\t43\nscore\t2\n' > '/tmp/tmp-campus.tsv' && expand -t 12 '/tmp/tmp-campus.tsv'; true ; } > /tmp/foundry2/GUEsTDuSTYironfROzEN
+            echo "wrote $(wc -c </tmp/foundry2/GUEsTDuSTYironfROzEN) bytes to $(dirname /tmp/foundry2/GUEsTDuSTYironfROzEN)/$(basename /tmp/foundry2/GUEsTDuSTYironfROzEN)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'GUEsTDuSTYironfROzEN'
+  send-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/cluster915 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  i10_78:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Last snapshot before release
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; find /run -maxdepth 2 -mmin -60 -exec echo {} + 2>/dev/null | sort | head -n 8; true ; } > /tmp/foundry2/Otter_e06b.src-4024
+            echo "wrote $(wc -c </tmp/foundry2/Otter_e06b.src-4024) bytes to $(dirname /tmp/foundry2/Otter_e06b.src-4024)/$(basename /tmp/foundry2/Otter_e06b.src-4024)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'Otter_e06b.src-4024'
+  realease-15:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/cluster915 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  cDeprecated:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Unload the loot tables and playtest
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; echo -n "step 2 of 5" | cksum; true ; } > /tmp/foundry2/receipt.moth
+            echo "wrote $(wc -c </tmp/foundry2/receipt.moth) bytes to $(dirname /tmp/foundry2/receipt.moth)/$(basename /tmp/foundry2/receipt.moth)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'receipt.moth'
+  LaunchTests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/receipt.moth 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  take-when:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Q4 ZIP
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; echo yes | tee /tmp/beeinbox.md; true ; } > /tmp/foundry2/surg3
+            echo "wrote $(wc -c </tmp/foundry2/surg3) bytes to $(dirname /tmp/foundry2/surg3)/$(basename /tmp/foundry2/surg3)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'surg3'
+  vega-plus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/surg3 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  ppPotion:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Plan Pulsar
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; find /run -type f -name "user" -exec readlink -f {} ';' 2>/dev/null | xargs ls -ld; true ; } > /tmp/foundry2/tensor_worker_render
+            echo "wrote $(wc -c </tmp/foundry2/tensor_worker_render) bytes to $(dirname /tmp/foundry2/tensor_worker_render)/$(basename /tmp/foundry2/tensor_worker_render)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'tensor_worker_render'
+  publish:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/tensor_worker_render 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  IDWrapper:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Freeze The Canary Fleet Phase
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; sort </etc/shells >"/dev/shm/forest2023-05-16.tmp" && head -n 3 "/dev/shm/forest2023-05-16.tmp"; true ; } > /tmp/foundry2/xx_3db95146af
+            echo "wrote $(wc -c </tmp/foundry2/xx_3db95146af) bytes to $(dirname /tmp/foundry2/xx_3db95146af)/$(basename /tmp/foundry2/xx_3db95146af)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'xx_3db95146af'
+  io-final:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/xx_3db95146af 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  LANG_CA:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Launch window weigh in
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; df -h --total | head -n 4; true ; } > /tmp/foundry2/fjord-65cf21.log
+            echo "wrote $(wc -c </tmp/foundry2/fjord-65cf21.log) bytes to $(dirname /tmp/foundry2/fjord-65cf21.log)/$(basename /tmp/foundry2/fjord-65cf21.log)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'fjord-65cf21.log'
+  fix-parse-reload:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/fjord-65cf21.log 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  pause_max:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: pkg tokens
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; find /opt -maxdepth 3 -type f -mtime -7 -exec md5sum '{}' ';' 2>/dev/null |xargs ls -ld; true ; } > /tmp/foundry2/SCarLEtBEta
+            echo "wrote $(wc -c </tmp/foundry2/SCarLEtBEta) bytes to $(dirname /tmp/foundry2/SCarLEtBEta)/$(basename /tmp/foundry2/SCarLEtBEta)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'SCarLEtBEta'
+  beta-v1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/cluster915 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  candle_gradient_socket_total:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Dedupe or tidy shared drive
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; for entry in brown teal gray; do echo "${entry^}"; done | tac; true ; } > /tmp/foundry2/GPU
+            echo "wrote $(wc -c </tmp/foundry2/GPU) bytes to $(dirname /tmp/foundry2/GPU)/$(basename /tmp/foundry2/GPU)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'GPU'
+  ensure-production-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/GPU 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  trackUrl:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Pay the welcome kits ahead of round two
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; ps -eo rss= | sort --numeric-sort | tail -n 1; true ; } > /tmp/foundry2/framewidgetnickelmountain
+            echo "wrote $(wc -c </tmp/foundry2/framewidgetnickelmountain) bytes to $(dirname /tmp/foundry2/framewidgetnickelmountain)/$(basename /tmp/foundry2/framewidgetnickelmountain)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'framewidgetnickelmountain'
+  vera-verify:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/framewidgetnickelmountain 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  topic-map-load:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: GOTO labeling
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; head -n 8 /etc/login.defs | tac; true ; } > /tmp/foundry2/TOKEN
+            echo "wrote $(wc -c </tmp/foundry2/TOKEN) bytes to $(dirname /tmp/foundry2/TOKEN)/$(basename /tmp/foundry2/TOKEN)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'TOKEN'
+  nightly-v8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/TOKEN 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  beginOptionPolicyDst:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Leaderboard streamed at last
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; grep 'sh$' /etc/passwd|sort|tail -n 10; true ; } > /tmp/foundry2/158a70d5d6eca08e8b6072d2eefb0a
+            echo "wrote $(wc -c </tmp/foundry2/158a70d5d6eca08e8b6072d2eefb0a) bytes to $(dirname /tmp/foundry2/158a70d5d6eca08e8b6072d2eefb0a)/$(basename /tmp/foundry2/158a70d5d6eca08e8b6072d2eefb0a)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - '158a70d5d6eca08e8b6072d2eefb0a'
+  bug-6153:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/158a70d5d6eca08e8b6072d2eefb0a 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  PPERR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Ingrid owns grounding
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; find /var/tmp -maxdepth 2 -name "*" -newer /etc/os-release -exec stat -c %F {} ";" 2>/dev/null | awk -F/ '{print $NF}'; true ; } > /tmp/foundry2/f91962
+            echo "wrote $(wc -c </tmp/foundry2/f91962) bytes to $(dirname /tmp/foundry2/f91962)/$(basename /tmp/foundry2/f91962)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'f91962'
+  BuildSuite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/cluster915 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  AcornV4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Survey Cairo edition
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; echo -n "don't panic" | sha256sum | cut -c1-16; true ; } > /tmp/foundry2/ravenFoxSignal
+            echo "wrote $(wc -c </tmp/foundry2/ravenFoxSignal) bytes to $(dirname /tmp/foundry2/ravenFoxSignal)/$(basename /tmp/foundry2/ravenFoxSignal)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'ravenFoxSignal'
+  cd-old:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/ravenFoxSignal 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  args_exp_prev:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: DESERIALIZE
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; ls /sys/class/net|head -n 8|shuf -n 5|rev|cat -n; true ; } > /tmp/foundry2/v7.13.36
+            echo "wrote $(wc -c </tmp/foundry2/v7.13.36) bytes to $(dirname /tmp/foundry2/v7.13.36)/$(basename /tmp/foundry2/v7.13.36)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'v7.13.36'
+  jul19-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/v7.13.36 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  sys_offset_brush:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Titrate freezer rack overnight
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; touch "/tmp/flightavatar02.csv" && mv -v "/tmp/flightavatar02.csv" "/tmp/healthkoala.txt"; true ; } > /tmp/foundry2/shader-memo-flux-quark
+            echo "wrote $(wc -c </tmp/foundry2/shader-memo-flux-quark) bytes to $(dirname /tmp/foundry2/shader-memo-flux-quark)/$(basename /tmp/foundry2/shader-memo-flux-quark)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'shader-memo-flux-quark'
+  preview:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/shader-memo-flux-quark 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  paint_wrap_warn_row:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: clear out the crash reports near Cairo
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; echo 42|tr ' ' '\n'|sort; true ; } > /tmp/foundry2/copper-river-module-gadget
+            echo "wrote $(wc -c </tmp/foundry2/copper-river-module-gadget) bytes to $(dirname /tmp/foundry2/copper-river-module-gadget)/$(basename /tmp/foundry2/copper-river-module-gadget)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'copper-river-module-gadget'
+  build-staging-artifact-bundle:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/copper-river-module-gadget 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  HF-843-recv-resource:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Initiative Badger
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; grep -s -r if /usr/share/doc/bash 2>/dev/null | cut -d: -f1 | sort -u; true ; } > /tmp/foundry2/surgeloaderazuretitan
+            echo "wrote $(wc -c </tmp/foundry2/surgeloaderazuretitan) bytes to $(dirname /tmp/foundry2/surgeloaderazuretitan)/$(basename /tmp/foundry2/surgeloaderazuretitan)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'surgeloaderazuretitan'
+  promote:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/cluster915 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  monkCam:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Opening tokenization
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; cat < /etc/hostname > /var/tmp/offer.dat && cat /var/tmp/offer.dat; true ; } > /tmp/foundry2/zinc_p4ylo4d
+            echo "wrote $(wc -c </tmp/foundry2/zinc_p4ylo4d) bytes to $(dirname /tmp/foundry2/zinc_p4ylo4d)/$(basename /tmp/foundry2/zinc_p4ylo4d)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'zinc_p4ylo4d'
+  auh-check:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/zinc_p4ylo4d 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  tax-domino:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Make sure to release the blue green slots
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; echo cairo hanoi manila rome tokyo quito | tr ' ' '\n' | shuf -n 4 | tac | awk '{print toupper(substr($0,1,1)) substr($0,2)}'; true ; } > /tmp/foundry2/021458_2017
+            echo "wrote $(wc -c </tmp/foundry2/021458_2017) bytes to $(dirname /tmp/foundry2/021458_2017)/$(basename /tmp/foundry2/021458_2017)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - '021458_2017'
+  Rollout_Staging5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/021458_2017 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  HTTPS_TTL_FINAL:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: BONUS
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; printf '%s' 'something went wrong' | od -An -c; true ; } > /tmp/foundry2/VioletLynxStone
+            echo "wrote $(wc -c </tmp/foundry2/VioletLynxStone) bytes to $(dirname /tmp/foundry2/VioletLynxStone)/$(basename /tmp/foundry2/VioletLynxStone)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'VioletLynxStone'
+  rocket:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/VioletLynxStone 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  Exit-ResourceObject:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Kickoff
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; echo x >/tmp/quota.tmp && ln -f /tmp/quota.tmp "/tmp/school-output-cookie.txt" && stat -c %h /tmp/quota.tmp; true ; } > /tmp/foundry2/22.191
+            echo "wrote $(wc -c </tmp/foundry2/22.191) bytes to $(dirname /tmp/foundry2/22.191)/$(basename /tmp/foundry2/22.191)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - '22.191'
+  v2-preview:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/22.191 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  onyx:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: SRCH31
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; if [[ -O $HOME ]]; then echo 'true'; elif [[ -e /tmp ]]; then echo maybe; else echo 'false'; fi; true ; } > /tmp/foundry2/HawkNodeNeutron
+            echo "wrote $(wc -c </tmp/foundry2/HawkNodeNeutron) bytes to $(dirname /tmp/foundry2/HawkNodeNeutron)/$(basename /tmp/foundry2/HawkNodeNeutron)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'HawkNodeNeutron'
+  full-send:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/HawkNodeNeutron 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  q_dot:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: X21 spot check junit output
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; type -P find; true ; } > /tmp/foundry2/bundle_sigma_buffer_buffer
+            echo "wrote $(wc -c </tmp/foundry2/bundle_sigma_buffer_buffer) bytes to $(dirname /tmp/foundry2/bundle_sigma_buffer_buffer)/$(basename /tmp/foundry2/bundle_sigma_buffer_buffer)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'bundle_sigma_buffer_buffer'
+  assemble-staging-release-candidate:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/bundle_sigma_buffer_buffer 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  balloon-char-bishop-atlas:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Cover art is go
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; grep -s -w then /etc/profile; true ; } > /tmp/foundry2/tealthicketcarrierorchard
+            echo "wrote $(wc -c </tmp/foundry2/tealthicketcarrierorchard) bytes to $(dirname /tmp/foundry2/tealthicketcarrierorchard)/$(basename /tmp/foundry2/tealthicketcarrierorchard)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'tealthicketcarrierorchard'
+  rm-dashboard:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/tealthicketcarrierorchard 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  y_train:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: BRK after query
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; true; echo $?; true ; } > /tmp/foundry2/TXN-2024-14251
+            echo "wrote $(wc -c </tmp/foundry2/TXN-2024-14251) bytes to $(dirname /tmp/foundry2/TXN-2024-14251)/$(basename /tmp/foundry2/TXN-2024-14251)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'TXN-2024-14251'
+  nova-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/TXN-2024-14251 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+  scale_Config-repo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Transfer the report PDFs over to staging
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; DIR='cache cleared'; declare -p DIR; true ; } > /tmp/foundry2/cluster915
+            echo "wrote $(wc -c </tmp/foundry2/cluster915) bytes to $(dirname /tmp/foundry2/cluster915)/$(basename /tmp/foundry2/cluster915)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'cluster915'
+  depoly:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Verify staged blob
+          command: |
+            { v=0; while read -r x; do v=$((v + (x+0))); done < /tmp/foundry2/cluster915 2>/dev/null; echo "v=$v"; } || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load archive
+          command: tar xzf panels-01.tgz
+      - run:
+          command: g++ --version
+      - run:
+          name: Workspace summary
+          command: sleep 25s
+      - run:
+          command: (./dispatch-io)
+
+  Shade2IRQ:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: My growth medium chill
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; find /usr/local -maxdepth 2 -mindepth 1 | head -n 2; true ; } > /tmp/foundry2/158a70d5d6eca08e8b6072d2eefb0a
+            echo "wrote $(wc -c </tmp/foundry2/158a70d5d6eca08e8b6072d2eefb0a) bytes to $(dirname /tmp/foundry2/158a70d5d6eca08e8b6072d2eefb0a)/$(basename /tmp/foundry2/158a70d5d6eca08e8b6072d2eefb0a)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - '158a70d5d6eca08e8b6072d2eefb0a'
+  copyCanvas:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: imaging UGH
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; getent passwd | grep -v nologin | awk -F : '{print $NF}' | wc -l; true ; } > /tmp/foundry2/VioletLynxStone
+            echo "wrote $(wc -c </tmp/foundry2/VioletLynxStone) bytes to $(dirname /tmp/foundry2/VioletLynxStone)/$(basename /tmp/foundry2/VioletLynxStone)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'VioletLynxStone'
+  gomwe1z:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Scale Health Checks v13
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; touch "/tmp/Diary_v3.log" && readlink -f "/tmp/Diary_v3.log"; true ; } > /tmp/foundry2/TXN-2024-14251
+            echo "wrote $(wc -c </tmp/foundry2/TXN-2024-14251) bytes to $(dirname /tmp/foundry2/TXN-2024-14251)/$(basename /tmp/foundry2/TXN-2024-14251)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'TXN-2024-14251'
+  dumpCountForKey:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Started asserting the image carousel
+          command: |
+            mkdir -p /tmp/foundry2
+            set +o pipefail 2>/dev/null; awk 'BEGIN{for(i=1;i<=500000;i++) print i-1}' > /tmp/foundry2/30.246.254; true
+            echo "wrote $(wc -c </tmp/foundry2/30.246.254) bytes to $(dirname /tmp/foundry2/30.246.254)/$(basename /tmp/foundry2/30.246.254)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - '30.246.254'
+  Final-Shade-Bit:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Reboot the display panel with a dry run first
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; grep -m4 --color=never 'adm' /etc/group | cut -d: -f1; true ; } > /tmp/foundry2/021458_2017
+            echo "wrote $(wc -c </tmp/foundry2/021458_2017) bytes to $(dirname /tmp/foundry2/021458_2017)/$(basename /tmp/foundry2/021458_2017)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - '021458_2017'
+  topic-snapshot-blend:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Give the support queue 8 seconds
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; { date; uname -r; whoami; } >"/tmp/new-hotel-onion.md" && cat "/tmp/new-hotel-onion.md"; true ; } > /tmp/foundry2/HawkNodeNeutron
+            echo "wrote $(wc -c </tmp/foundry2/HawkNodeNeutron) bytes to $(dirname /tmp/foundry2/HawkNodeNeutron)/$(basename /tmp/foundry2/HawkNodeNeutron)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'HawkNodeNeutron'
+  tmp_Glyph4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Phase XII schema refresh
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; sed -E 's/[[:space:]]+$//' "$HOME/.bashrc" | cat -A | head -n 5; true ; } > /tmp/foundry2/GmEtVgf
+            echo "wrote $(wc -c </tmp/foundry2/GmEtVgf) bytes to $(dirname /tmp/foundry2/GmEtVgf)/$(basename /tmp/foundry2/GmEtVgf)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'GmEtVgf'
+  FlagScannerMidPipe:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Stream the day night cycle for tomorrow
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; dd if=/dev/urandom of='/tmp/s_2024-05-13.txt' bs=512 count=1 2>/dev/null && wc -c '/tmp/s_2024-05-13.txt'; true ; } > /tmp/foundry2/fjord-65cf21.log
+            echo "wrote $(wc -c </tmp/foundry2/fjord-65cf21.log) bytes to $(dirname /tmp/foundry2/fjord-65cf21.log)/$(basename /tmp/foundry2/fjord-65cf21.log)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'fjord-65cf21.log'
+  file_stage:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Our turn to filter the petri dishes
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; tail -n 6 /etc/group | cut -d ":" -f 3 | tac; true ; } > /tmp/foundry2/framewidgetnickelmountain
+            echo "wrote $(wc -c </tmp/foundry2/framewidgetnickelmountain) bytes to $(dirname /tmp/foundry2/framewidgetnickelmountain)/$(basename /tmp/foundry2/framewidgetnickelmountain)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'framewidgetnickelmountain'
+  success_account_manager:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Yell at the release candidate
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; ps -eo comm= |fmt -w 68 |expand -t 6; true ; } > /tmp/foundry2/GPU
+            echo "wrote $(wc -c </tmp/foundry2/GPU) bytes to $(dirname /tmp/foundry2/GPU)/$(basename /tmp/foundry2/GPU)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'GPU'
+  hardCtx:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Score the embeddings now
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; sort -n -k3,3 -t: /etc/group|tail -n 10|awk -F: '$4 != "" {print $1}'|head -n 10; true ; } > /tmp/foundry2/receipt.moth
+            echo "wrote $(wc -c </tmp/foundry2/receipt.moth) bytes to $(dirname /tmp/foundry2/receipt.moth)/$(basename /tmp/foundry2/receipt.moth)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'receipt.moth'
+  TAX_EXTERNAL:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Warm the held out set
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; ls -Fl |awk '{print $3}' |sort -u; true ; } > /tmp/foundry2/shader-memo-flux-quark
+            echo "wrote $(wc -c </tmp/foundry2/shader-memo-flux-quark) bytes to $(dirname /tmp/foundry2/shader-memo-flux-quark)/$(basename /tmp/foundry2/shader-memo-flux-quark)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'shader-memo-flux-quark'
+  msTimer:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Act XII Run Perf Baseline
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; diff <(echo 'check mail') <(echo 'back in 5') || echo different; true ; } > /tmp/foundry2/xx_3db95146af
+            echo "wrote $(wc -c </tmp/foundry2/xx_3db95146af) bytes to $(dirname /tmp/foundry2/xx_3db95146af)/$(basename /tmp/foundry2/xx_3db95146af)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'xx_3db95146af'
+  rgt-089827:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Revert briefing
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; printenv| cut -d '=' -f 1| tr '[:lower:]' '[:upper:]'| tac; true ; } > /tmp/foundry2/loader.photon.river
+            echo "wrote $(wc -c </tmp/foundry2/loader.photon.river) bytes to $(dirname /tmp/foundry2/loader.photon.river)/$(basename /tmp/foundry2/loader.photon.river)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'loader.photon.river'
+  fixture_in_l:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Zero hour pinning
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; ps aux | awk 'NR>1 {print $1}' | tail -n 3 | nl | tr -cs '[:alnum:]' '\n'; true ; } > /tmp/foundry2/ravenFoxSignal
+            echo "wrote $(wc -c </tmp/foundry2/ravenFoxSignal) bytes to $(dirname /tmp/foundry2/ravenFoxSignal)/$(basename /tmp/foundry2/ravenFoxSignal)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'ravenFoxSignal'
+  teraServiceDriver:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Texture day night cycle act 1
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; compgen -v | sort | uniq -c | sort -nr | cut -c1-21 | tr -s ' ' | nl; true ; } > /tmp/foundry2/tealthicketcarrierorchard
+            echo "wrote $(wc -c </tmp/foundry2/tealthicketcarrierorchard) bytes to $(dirname /tmp/foundry2/tealthicketcarrierorchard)/$(basename /tmp/foundry2/tealthicketcarrierorchard)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'tealthicketcarrierorchard'
+  usp_ColumnFreeStore:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/foundry2
+      - run:
+          name: Escalate to Dana
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; mkdir -p '/var/tmp/drawer-avatar' && chmod -R go-rwx '/var/tmp/drawer-avatar' && ls -ld '/var/tmp/drawer-avatar'; true ; } > /tmp/foundry2/v7.13.36
+            echo "wrote $(wc -c </tmp/foundry2/v7.13.36) bytes to $(dirname /tmp/foundry2/v7.13.36)/$(basename /tmp/foundry2/v7.13.36)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - 'v7.13.36'
+  IS_HARD:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: With care pay the new hires
+          command: |
+            mkdir -p /tmp/foundry2
+            { set +o pipefail 2>/dev/null; cut -c1-11 /proc/cpuinfo | nl; true ; } > /tmp/foundry2/22.191
+            echo "wrote $(wc -c </tmp/foundry2/22.191) bytes to $(dirname /tmp/foundry2/22.191)/$(basename /tmp/foundry2/22.191)"
+      - persist_to_workspace:
+          root: /tmp/foundry2
+          paths:
+            - '22.191'
+workflows:
+  matrix:
+    jobs:
+      - scale_Config-repo
+      - i10_78
+      - HF-843-recv-resource
+      - depoly:
+          requires:
+            - scale_Config-repo
+            - i10_78
+            - HF-843-recv-resource
+      - realease-15:
+          requires:
+            - scale_Config-repo
+            - i10_78
+            - HF-843-recv-resource
+      - promote:
+          requires:
+            - scale_Config-repo
+            - i10_78
+            - HF-843-recv-resource
+      - beta-v1:
+          requires:
+            - scale_Config-repo
+            - i10_78
+            - HF-843-recv-resource
+      - send-it:
+          requires:
+            - scale_Config-repo
+            - i10_78
+            - HF-843-recv-resource
+      - BuildSuite:
+          requires:
+            - scale_Config-repo
+            - i10_78
+            - HF-843-recv-resource
+      - beginOptionPolicyDst
+      - Shade2IRQ:
+          requires:
+            - beginOptionPolicyDst
+      - bug-6153:
+          requires:
+            - Shade2IRQ
+      - HTTPS_TTL_FINAL:
+          requires:
+            - Shade2IRQ
+      - copyCanvas:
+          requires:
+            - HTTPS_TTL_FINAL
+      - rocket:
+          requires:
+            - copyCanvas
+      - y_train:
+          requires:
+            - copyCanvas
+      - gomwe1z:
+          requires:
+            - y_train
+      - nova-v2:
+          requires:
+            - gomwe1z
+      - allow_insert:
+          requires:
+            - gomwe1z
+      - dumpCountForKey:
+          requires:
+            - allow_insert
+      - apr5-cleanup:
+          requires:
+            - dumpCountForKey
+      - tax-domino:
+          requires:
+            - dumpCountForKey
+      - Final-Shade-Bit:
+          requires:
+            - tax-domino
+      - Rollout_Staging5:
+          requires:
+            - Final-Shade-Bit
+      - onyx
+      - topic-snapshot-blend:
+          requires:
+            - onyx
+      - full-send:
+          requires:
+            - topic-snapshot-blend
+      - loadLoginAnimated:
+          requires:
+            - topic-snapshot-blend
+      - tmp_Glyph4:
+          requires:
+            - loadLoginAnimated
+      - node18-fmt:
+          requires:
+            - tmp_Glyph4
+      - LANG_CA:
+          requires:
+            - tmp_Glyph4
+      - FlagScannerMidPipe:
+          requires:
+            - LANG_CA
+      - fix-parse-reload:
+          requires:
+            - FlagScannerMidPipe
+      - trackUrl:
+          requires:
+            - FlagScannerMidPipe
+      - file_stage:
+          requires:
+            - trackUrl
+      - vera-verify:
+          requires:
+            - file_stage
+      - candle_gradient_socket_total:
+          requires:
+            - file_stage
+      - success_account_manager:
+          requires:
+            - candle_gradient_socket_total
+      - ensure-production-regression-suite:
+          requires:
+            - success_account_manager
+      - cDeprecated:
+          requires:
+            - success_account_manager
+      - hardCtx:
+          requires:
+            - cDeprecated
+      - LaunchTests:
+          requires:
+            - hardCtx
+      - sys_offset_brush:
+          requires:
+            - hardCtx
+      - TAX_EXTERNAL:
+          requires:
+            - sys_offset_brush
+      - preview:
+          requires:
+            - TAX_EXTERNAL
+      - ppPotion
+      - publish:
+          requires:
+            - ppPotion
+      - topic-map-load:
+          requires:
+            - ppPotion
+      - nightly-v8:
+          requires:
+            - topic-map-load
+      - q_dot:
+          requires:
+            - topic-map-load
+      - assemble-staging-release-candidate:
+          requires:
+            - q_dot
+      - paint_wrap_warn_row:
+          requires:
+            - q_dot
+      - build-staging-artifact-bundle:
+          requires:
+            - paint_wrap_warn_row
+      - take-when:
+          requires:
+            - paint_wrap_warn_row
+      - vega-plus:
+          requires:
+            - take-when
+      - monkCam:
+          requires:
+            - take-when
+      - auh-check:
+          requires:
+            - monkCam
+      - IDWrapper
+      - msTimer:
+          requires:
+            - IDWrapper
+      - io-final:
+          requires:
+            - msTimer
+      - enviromentLayer:
+          requires:
+            - msTimer
+      - rgt-089827:
+          requires:
+            - enviromentLayer
+      - add-cache:
+          requires:
+            - rgt-089827
+      - AcornV4:
+          requires:
+            - rgt-089827
+      - fixture_in_l:
+          requires:
+            - AcornV4
+      - cd-old:
+          requires:
+            - fixture_in_l
+      - balloon-char-bishop-atlas:
+          requires:
+            - fixture_in_l
+      - teraServiceDriver:
+          requires:
+            - balloon-char-bishop-atlas
+      - rm-dashboard:
+          requires:
+            - teraServiceDriver
+      - args_exp_prev:
+          requires:
+            - teraServiceDriver
+      - usp_ColumnFreeStore:
+          requires:
+            - args_exp_prev
+      - jul19-cleanup:
+          requires:
+            - usp_ColumnFreeStore
+      - Exit-ResourceObject:
+          requires:
+            - usp_ColumnFreeStore
+      - IS_HARD:
+          requires:
+            - Exit-ResourceObject
+      - v2-preview:
+          requires:
+            - IS_HARD
